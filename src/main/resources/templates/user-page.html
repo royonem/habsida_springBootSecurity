@@ -2,10 +2,9 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Users</title>
+    <title>User Details</title>
 </head>
 <body>
-<a href="/admin/new-user">Add User</a>
 
 <table border="1">
     <tr>
@@ -13,25 +12,13 @@
         <th>Age</th>
         <th>Gender</th>
         <th>Nationality</th>
-        <th>Edit</th>
-        <th>Delete</th>
     </tr>
 
-    <tr th:each="user : ${users}">
+    <tr>
         <td th:text="${user.username}"></td>
         <td th:text="${user.age}"></td>
         <td th:text="${user.gender}"></td>
         <td th:text="${user.nationality}"></td>
-        <td>
-            <a th:href="@{/admin/edit/{id}(id=${user.id})}">Edit</a>
-        </td>
-        <td>
-            <form th:action="@{'/admin/delete/' + ${user.id}}" method="post">
-                <input type="hidden" name="_method" value="delete"/>
-                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
-                <button type="submit">Delete</button>
-            </form>
-        </td>
     </tr>
 </table>
 <form th:action="@{/logout}" method="post">

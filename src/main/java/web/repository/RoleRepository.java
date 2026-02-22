@@ -2,10 +2,11 @@ package web.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import web.model.User;
+import web.model.Role;
 import java.util.Optional;
 
 @Repository
-public interface UserRepository extends JpaRepository<User, Long> {
-    Optional<User> findByUsername(String username);
+public interface RoleRepository extends JpaRepository<Role, Long> {
+    Optional<Role> findByName(String roleName);
+
 }

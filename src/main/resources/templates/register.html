@@ -2,10 +2,10 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>User Form</title>
+    <title>Register Form</title>
 </head>
 <body>
-<form th:action="@{/admin/save}" th:object="${user}" method="post">
+<form th:action="@{/save}" th:object="${user}" method="post">
     <input type="hidden" th:field="*{id}" />
 
     Username: <input type="text" th:field="*{username}" /><br/>
@@ -20,5 +20,5 @@
     <button type="submit">Save</button>
 </form>
 
-<a href="/admin">Back</a>
+<a href="/">Back</a>
 </body>

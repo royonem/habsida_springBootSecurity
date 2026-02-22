@@ -1,13 +1,12 @@
 package web.model;
 
-import javax.persistence.*;
-
+import jakarta.persistence.*;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -49,30 +48,42 @@ public class User implements UserDetails {
     )
     private Set<Role> roles = new HashSet<>();
 
-
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of();
+        return roles.stream()// go through each role one by one
+                .map(role -> new SimpleGrantedAuthority(role.getName())) // maps role objects
+                // example) new SimpleGrantedAuthority("ROLE_ADMIN")
+                .toList();
     }
+
 
     @Override
     public boolean isAccountNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isEnabled() {
-        return false;
+        return true;
+    }
+
+    // getters and setters
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
     }
 
     public String getUsername() {
