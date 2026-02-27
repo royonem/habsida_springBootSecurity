@@ -3,7 +3,6 @@ package web.service;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import web.model.Role;
 import web.model.User;
@@ -46,12 +45,6 @@ public class UserService implements UserDetailsService {
     public void save(User user) { repo.save(user); }
 
     public void delete(Long id) { repo.deleteById(id); }
-
-    public User findUserByUsername(String username) throws UsernameNotFoundException{
-        return repo.findByUsername(username)
-                .orElseThrow(() ->
-                new UsernameNotFoundException("User not found"));
-    }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
